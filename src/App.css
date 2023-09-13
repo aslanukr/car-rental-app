@@ -2,3 +2,9 @@
   max-width: 1440px;
   margin: 0 auto;
 }
+
+.swiper-image {
+  max-width: 100%; /* Set a maximum width for the images */
+  height: auto; /* Maintain the aspect ratio */
+  object-fit: cover; /* Control how the image fits within the container */
+}
