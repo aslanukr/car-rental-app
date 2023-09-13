@@ -1,13 +1,12 @@
+import { Outlet } from "react-router-dom";
 import "./App.css";
-import CarIcon from "./assets/car.svg";
+import Layout from "./components/Layout";
 
 function App() {
   return (
-    <>
-      <h1>Car Rental app is under construction</h1>
-      <img src={CarIcon} alt="Car icon" width={200} />
-      <h2>We`ll be happy to have you as our client soon!</h2>
-    </>
+    <Layout>
+      <Outlet />
+    </Layout>
   );
 }
 
