@@ -5,13 +5,13 @@ const Navbar = () => {
     <nav>
       <LinkList>
         <li>
-          <Link to={`/`}>Home</Link>
+          <Link to={`/`}>HOME</Link>
         </li>
         <li>
-          <Link to={`catalog`}>Catalog</Link>
+          <Link to={`catalog`}>CATALOG</Link>
         </li>
         <li>
-          <Link to={`favorites`}>Favorites</Link>
+          <Link to={`favorites`}>FAVORITES</Link>
         </li>
       </LinkList>
     </nav>
