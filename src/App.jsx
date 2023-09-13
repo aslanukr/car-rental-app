@@ -4,7 +4,7 @@ import {
   Route,
   Navigate,
 } from "react-router-dom";
-
+import "./App.css";
 import Layout from "./components/Layout";
 import Home from "../src/pages/Home/Home";
 import Catalog from "../src/pages/Catalog/Catalog";
