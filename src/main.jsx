@@ -8,7 +8,7 @@ import Favorites from "./pages/Favorites/Favorites";
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: "/car-rental-app",
     element: <App />,
     children: [
       {
