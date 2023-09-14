@@ -1,20 +1,24 @@
-import { Swiper, SwiperSlide } from "swiper/react";
+import { SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 
 import { Autoplay, Pagination, Navigation } from "swiper/modules";
 
-import image1 from "../../assets/images/rent-cars1.jpg";
-import image2 from "../../assets/images/rent-cars2.jpg";
-import image3 from "../../assets/images/rent-cars3.png";
-import { SwiperImg } from "./Home.styled";
+import { HeroButton, SwiperHero, SwiperImg } from "./Swiper.styled";
+
+import initialImg from "assets/images/initial.png";
+import img1 from "assets/images/1.png";
+import img2 from "assets/images/2.png";
+import img3 from "assets/images/3.png";
+import img4 from "assets/images/4.png";
+import lastImg from "assets/images/last.png";
 
 const HeroSwiper = () => {
-  const images = [image1, image2, image3];
+  const images = [initialImg, img1, img2, img3, img4, lastImg];
 
   return (
-    <Swiper
+    <SwiperHero
       spaceBetween={30}
       centeredSlides={true}
       loop={true}
@@ -33,7 +37,8 @@ const HeroSwiper = () => {
           <SwiperImg src={image} alt={`Slide ${index + 1}`} />
         </SwiperSlide>
       ))}
-    </Swiper>
+      <HeroButton>Pick a car</HeroButton>
+    </SwiperHero>
   );
 };
 

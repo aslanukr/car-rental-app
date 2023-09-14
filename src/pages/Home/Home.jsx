@@ -1,5 +1,5 @@
+import HeroSwiper from "src/components/Swiper/Swiper";
 import { Hero, SwiperContainer } from "./Home.styled";
-import HeroSwiper from "./Swiper";
 
 const Home = () => {
   return (

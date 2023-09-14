@@ -7,7 +7,7 @@ export const HeaderContainer = styled.header`
   position: sticky;
   z-index: 1100;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
   align-items: center;
   min-height: 70px;
   padding: 12px 24px 12px 24px;
@@ -18,8 +18,6 @@ export const HeaderContainer = styled.header`
     rgba(94, 212, 255, 0.3),
     rgba(52, 112, 255, 0.4)
   );
-  border-bottom-left-radius: 16px;
-  border-bottom-right-radius: 16px;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4);
   backdrop-filter: blur(5px);
   -webkit-backdrop-filter: blur(5px);
@@ -52,11 +50,18 @@ export const LinkList = styled.ul`
 `;
 
 export const Link = styled(NavLink)`
-  font-size: 30px;
+  font-size: 25px;
   font-weight: 500;
   color: #3d6889;
 
   &.active {
+    color: #3470ff;
+  }
+
+  transition: color 250ms ease-in;
+
+  &:hover,
+  &:focus {
     color: #3470ff;
   }
 `;

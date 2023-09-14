@@ -1,5 +1,5 @@
 import { LogoIcon, LogoName, LogoSpan, LogoWrapper } from "./Header.styled";
-import CarIcon from "../../assets/car.svg";
+import CarIcon from "assets/car.svg";
 
 const Logo = () => {
   return (
