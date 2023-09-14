@@ -1,5 +1,5 @@
 import styled from "styled-components";
-// import CloseIcon from "@mui/material";
+import { AiOutlineClose } from "react-icons/ai";
 
 export const Overlay = styled.div`
   position: fixed;
@@ -26,10 +26,10 @@ export const ModalLayer = styled.div`
   border-radius: 24px;
 `;
 
-// export const Close = styled(CloseIcon)`
-//   cursor: pointer;
-//   position: absolute;
-//   color: rgba(66, 137, 254, 255);
-//   top: 7px;
-//   right: 7px;
-// `;
+export const Close = styled(AiOutlineClose)`
+  cursor: pointer;
+  position: absolute;
+  color: rgba(18, 20, 23, 1);
+  top: 7px;
+  right: 7px;
+`;

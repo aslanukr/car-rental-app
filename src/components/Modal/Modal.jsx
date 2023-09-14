@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { createPortal } from "react-dom";
-import { ModalLayer, Overlay } from "./Modal.styled";
+import { Close, ModalLayer, Overlay } from "./Modal.styled";
 import CarDetails from "../CarDetails/CarDetails";
 
 const modalRoot = document.querySelector("#modal-root");
@@ -28,7 +28,7 @@ const Modal = ({ onClose, car }) => {
   return createPortal(
     <Overlay onClick={handleBackdropClick}>
       <ModalLayer>
-        {/* <Close onClick={() => onClose()} /> */}
+        <Close onClick={() => onClose()} />
         <CarDetails onClose={onClose} data={car} />
       </ModalLayer>
     </Overlay>,
