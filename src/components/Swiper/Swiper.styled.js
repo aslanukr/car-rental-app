@@ -20,7 +20,7 @@ export const HeroButton = styled.button`
   left: 50%;
   transform: translateX(-50%);
   color: #ffffff;
-  background-color: #3d6889;
+  background-color: #3470ff;
   border: none;
   border-radius: 12px;
   padding: 12px 50px;
@@ -31,6 +31,6 @@ export const HeroButton = styled.button`
 
   &:hover,
   &:focus {
-    background-color: #3470ff;
+    background-color: #0b44cd;
   }
 `;
