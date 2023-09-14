@@ -171,3 +171,7 @@ img {
   flex-direction: column;
   margin: 0 auto;
 }
+
+body.modal-open {
+  overflow: hidden;
+}
