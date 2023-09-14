@@ -1,9 +1,9 @@
 import { Image, ImageThumb } from "./CarImage.styled";
 
-const CarImage = ({ imageURL }) => {
+const CarImage = ({ imageURL, alt }) => {
   return (
     <ImageThumb>
-      <Image src={imageURL} />
+      <Image src={imageURL} alt={alt} />
     </ImageThumb>
   );
 };

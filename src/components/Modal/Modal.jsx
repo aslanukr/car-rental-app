@@ -29,7 +29,7 @@ const Modal = ({ onClose, car }) => {
     <Overlay onClick={handleBackdropClick}>
       <ModalLayer>
         <Close onClick={() => onClose()} />
-        <CarDetails onClose={onClose} data={car} />
+        <CarDetails data={car} />
       </ModalLayer>
     </Overlay>,
     modalRoot
