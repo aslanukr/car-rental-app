@@ -4,7 +4,7 @@ import {
   Route,
   Navigate,
 } from "react-router-dom";
-import "./App.css";
+
 import { Suspense, lazy } from "react";
 import Loader from "./components/Loader/Loader";
 

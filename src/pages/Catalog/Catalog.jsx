@@ -1,5 +1,31 @@
+import { useEffect, useState } from "react";
+import CarCard from "src/components/CarCard/CarCard";
+import { getCatalog } from "src/services/api";
+import { GalleryGrid, GallerySection } from "./Catalog.styled";
+
 const Catalog = () => {
-  return <div>Catalog</div>;
+  const [cars, setCars] = useState([]);
+
+  useEffect(() => {
+    async function fetch() {
+      try {
+        const result = await getCatalog();
+        setCars(result);
+      } catch (error) {
+        console.error("Error fetching catalog:", error);
+      }
+    }
+
+    fetch();
+  }, []);
+
+  return (
+    <GallerySection>
+      <GalleryGrid>
+        {cars && cars.map((car) => <CarCard key={car.id} car={car} />)}
+      </GalleryGrid>
+    </GallerySection>
+  );
 };
 
 export default Catalog;
