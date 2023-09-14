@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import CarCard from "src/components/CarCard/CarCard";
 import { getCatalog } from "src/services/api";
-import { GalleryGrid, GallerySection } from "./Catalog.styled";
+import { FilterSection, GalleryGrid, GallerySection } from "./Catalog.styled";
 
 const Catalog = () => {
   const [cars, setCars] = useState([]);
@@ -20,11 +20,14 @@ const Catalog = () => {
   }, []);
 
   return (
-    <GallerySection>
-      <GalleryGrid>
-        {cars && cars.map((car) => <CarCard key={car.id} car={car} />)}
-      </GalleryGrid>
-    </GallerySection>
+    <>
+      <FilterSection>Filter</FilterSection>
+      <GallerySection>
+        <GalleryGrid>
+          {cars && cars.map((car) => <CarCard key={car.id} car={car} />)}
+        </GalleryGrid>
+      </GallerySection>
+    </>
   );
 };
 
