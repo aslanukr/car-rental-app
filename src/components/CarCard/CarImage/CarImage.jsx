@@ -6,7 +6,7 @@ import {
   addToFavorites,
   removeFromFavorites,
 } from "src/redux/favorites/favoritesSlice";
-import { selectIfCarFavorite } from "src/redux/selectors";
+import { selectIfCarFavorite } from "src/redux/favorites/selectors";
 
 const CarImage = ({ imageURL, alt, id }) => {
   const dispatch = useDispatch();

@@ -3,7 +3,7 @@ import { GallerySection } from "../Catalog/Catalog.styled";
 
 import EmptyFavorites from "src/components/EmptyFavorites/EmptyFavorites";
 import { useSelector } from "react-redux";
-import { selectFavorites } from "src/redux/selectors";
+import { selectFavorites } from "src/redux/favorites/selectors";
 
 const Favorites = () => {
   const favorites = useSelector(selectFavorites);

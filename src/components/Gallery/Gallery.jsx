@@ -4,7 +4,7 @@ import { getCatalog } from "src/services/api";
 import CarCard from "../CarCard/CarCard";
 
 import { useSelector } from "react-redux";
-import { selectFavorites } from "src/redux/selectors";
+import { selectFavorites } from "src/redux/favorites/selectors";
 
 const Gallery = ({ renderFavorites }) => {
   const [cars, setCars] = useState([]);
