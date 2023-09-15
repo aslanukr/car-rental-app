@@ -2,10 +2,13 @@ import { useEffect, useState } from "react";
 import { GalleryGrid } from "./Gallery.styled";
 import { getCatalog } from "src/services/api";
 import CarCard from "../CarCard/CarCard";
-import { getFavorites } from "src/utilities/localStorage";
+
+import { useSelector } from "react-redux";
+import { selectFavorites } from "src/redux/selectors";
 
 const Gallery = ({ renderFavorites }) => {
   const [cars, setCars] = useState([]);
+  const favorites = useSelector(selectFavorites);
 
   useEffect(() => {
     async function fetch() {
@@ -20,8 +23,7 @@ const Gallery = ({ renderFavorites }) => {
     fetch();
   }, []);
 
-  const favIds = getFavorites();
-  const favoriteCars = cars.filter((car) => favIds.includes(car.id));
+  const favoriteCars = cars.filter((car) => favorites.includes(car.id));
 
   return (
     <GalleryGrid>

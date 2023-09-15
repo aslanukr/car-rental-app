@@ -10,17 +10,18 @@ import {
   REGISTER,
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
-import favoritesSlice from "./favorites/favoritesSlice";
+
+import { reducer } from "./reducer";
 
 const persistConfig = {
   key: "favorites",
   storage,
 };
 
-const persistedFavoritesReducer = persistReducer(persistConfig, favoritesSlice);
+const persistedCarsReducer = persistReducer(persistConfig, reducer);
 
 export const store = configureStore({
-  reducer: persistedFavoritesReducer,
+  reducer: persistedCarsReducer,
   middleware(getDefaultMiddleware) {
     return getDefaultMiddleware({
       serializableCheck: {
