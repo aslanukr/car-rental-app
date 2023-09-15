@@ -1,27 +1,23 @@
-import { useEffect, useState } from "react";
 import { FavoriteBtn, Image, ImageThumb } from "./CarImage.styled";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
+
+import { useDispatch, useSelector } from "react-redux";
 import {
   addToFavorites,
-  getFavorites,
   removeFromFavorites,
-} from "src/utilities/localStorage";
+} from "src/redux/favorites/favoritesSlice";
+import { selectIfCarFavorite } from "src/redux/favorites/selectors";
 
 const CarImage = ({ imageURL, alt, id }) => {
-  const [isFavorite, setIsFavorite] = useState(false);
-
-  useEffect(() => {
-    const favorites = getFavorites();
-    setIsFavorite(favorites.includes(id));
-  }, [id]);
+  const dispatch = useDispatch();
+  const isFavorite = useSelector((state) => selectIfCarFavorite(state, id));
 
   const toggleFavorite = () => {
     if (isFavorite) {
-      removeFromFavorites(id);
+      dispatch(removeFromFavorites({ carId: id }));
     } else {
-      addToFavorites(id);
+      dispatch(addToFavorites({ carId: id }));
     }
-    setIsFavorite(!isFavorite);
   };
 
   return (

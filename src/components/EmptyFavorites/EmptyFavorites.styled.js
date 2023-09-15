@@ -21,7 +21,7 @@ export const GoToBtn = styled.button`
   border: none;
   border-radius: 12px;
   padding: 12px 50px;
-  font-weight: 700;
+  font-weight: 600;
   font-size: 25px;
   cursor: pointer;
   transition: background-color 250ms ease-in;

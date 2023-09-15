@@ -1,6 +1,6 @@
 import { useState } from "react";
-import CarImage from "../CarImage/CarImage";
-import CardInfo from "../CardInfo/CardInfo";
+import CarImage from "./CarImage/CarImage";
+import CardInfo from "./CardInfo/CardInfo";
 import { CardButton, CardWrapper } from "./CarCard.styled";
 import Modal from "../Modal/Modal";
 
