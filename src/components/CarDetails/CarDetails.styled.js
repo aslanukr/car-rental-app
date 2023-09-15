@@ -3,14 +3,14 @@ import styled from "styled-components";
 export const DetailsWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  width: 461px;
 `;
 
 export const Thumb = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 469px;
+  width: 461px;
+  height: 248px;
   background-color: white;
   border-radius: 12px;
   overflow: hidden;

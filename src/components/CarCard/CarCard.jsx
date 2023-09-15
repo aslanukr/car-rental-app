@@ -20,7 +20,7 @@ const CarCard = ({ car }) => {
 
   return (
     <CardWrapper>
-      <CarImage imageURL={img} alt={`${make} ${model}`} />
+      <CarImage imageURL={img} alt={`${make} ${model}`} id={id} />
       <CardInfo data={car} />
       <CardButton onClick={handleCardBtnClick}>Learn more</CardButton>
       {showModal && <Modal onClose={toggleModal} car={car}></Modal>}
