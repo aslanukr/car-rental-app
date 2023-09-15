@@ -34,7 +34,7 @@ export const LogoIcon = styled.img`
 `;
 
 export const LogoName = styled.span`
-  font-weight: 700;
+  font-weight: 600;
   font-size: 50px;
   color: #3d6889;
 `;
