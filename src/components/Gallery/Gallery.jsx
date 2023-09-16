@@ -1,27 +1,21 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { GalleryGrid } from "./Gallery.styled";
-import { getCatalog } from "src/services/api";
+
 import CarCard from "../CarCard/CarCard";
 
-import { useSelector } from "react-redux";
-import { selectFavorites } from "src/redux/favorites/selectors";
+import { useDispatch, useSelector } from "react-redux";
+import { selectCars, selectFavorites } from "src/redux/selectors";
+import { getCarsThunk } from "src/redux/cars/carsThunk";
 
 const Gallery = ({ renderFavorites }) => {
-  const [cars, setCars] = useState([]);
+  const cars = useSelector(selectCars);
   const favorites = useSelector(selectFavorites);
 
-  useEffect(() => {
-    async function fetch() {
-      try {
-        const result = await getCatalog();
-        setCars(result);
-      } catch (error) {
-        console.error("Error fetching catalog:", error);
-      }
-    }
+  const dispatch = useDispatch();
 
-    fetch();
-  }, []);
+  useEffect(() => {
+    dispatch(getCarsThunk());
+  }, [dispatch]);
 
   const favoriteCars = cars.filter((car) => favorites.includes(car.id));
 
