@@ -18,7 +18,8 @@ export const HeaderContainer = styled.header`
     rgba(94, 212, 255, 0.3),
     rgba(52, 112, 255, 0.4)
   );
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4);
+
+  box-shadow: 0 5px 30px rgba(0, 0, 0, 0.4);
   backdrop-filter: blur(5px);
   -webkit-backdrop-filter: blur(5px);
 `;

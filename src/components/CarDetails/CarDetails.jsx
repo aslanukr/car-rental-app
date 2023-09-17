@@ -15,6 +15,8 @@ import {
   Thumb,
 } from "./CarDetails.styled";
 
+import placeholderCar from "src/assets/images/placeholder-car.jpg";
+
 const CarDetails = ({ data }) => {
   const {
     id,
@@ -45,7 +47,11 @@ const CarDetails = ({ data }) => {
   return (
     <DetailsWrapper>
       <Thumb>
-        <CarImg src={img} alt={`${make} ${model} `} />
+        {img ? (
+          <CarImg src={img} alt={`${make} ${model} `} />
+        ) : (
+          <CarImg src={placeholderCar} alt={`${make} ${model} `} />
+        )}
       </Thumb>
       <Make>
         {make} <Model>{model}</Model>, {year}
@@ -91,7 +97,7 @@ const CarDetails = ({ data }) => {
           Price: <AccentSpan>{rentalPrice}</AccentSpan>
         </ConditionsItem>
       </ConditionsList>
-      <ModalButton href="tel:+380730000000">Rental car</ModalButton>
+      <ModalButton href="tel:+380730000000">Rent a car</ModalButton>
     </DetailsWrapper>
   );
 };

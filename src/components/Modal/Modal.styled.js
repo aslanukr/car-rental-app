@@ -45,4 +45,11 @@ export const Close = styled(AiOutlineClose)`
   color: rgba(18, 20, 23, 1);
   top: 16px;
   right: 16px;
+
+  transition: color 250ms ease-in;
+
+  &:hover,
+  &:focus {
+    color: #3470ff;
+  }
 `;
