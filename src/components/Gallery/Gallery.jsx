@@ -11,10 +11,8 @@ import Error from "../Error/Error";
 import { getCatalog } from "src/services/api";
 
 const Gallery = ({ renderFavorites }) => {
-  // const cars = useSelector(selectCars);
   const favorites = useSelector(selectFavorites);
-  // const isLoading = useSelector(selectCarsIsLoading);
-  // const error = useSelector(selectCarsError);
+
   const [cars, setCars] = useState([]);
   const [page, setPage] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
@@ -22,12 +20,6 @@ const Gallery = ({ renderFavorites }) => {
   const [loadMoreClicked, setLoadMoreClicked] = useState(false);
 
   const containerRef = useRef(null);
-
-  // const dispatch = useDispatch();
-
-  // useEffect(() => {
-  //   dispatch(getCarsThunk(page));
-  // }, [dispatch, page]);
 
   useEffect(() => {
     const fetchCars = async (page) => {
