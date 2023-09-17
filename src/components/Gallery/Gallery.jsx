@@ -3,22 +3,24 @@ import { GalleryGrid, GalleryWrapper, LoadMoreBtn } from "./Gallery.styled";
 
 import CarCard from "../CarCard/CarCard";
 
-import { useSelector } from "react-redux";
-import { selectFavorites } from "src/redux/selectors";
+import { useDispatch, useSelector } from "react-redux";
+import { selectCars, selectFavorites } from "src/redux/selectors";
 
 import Loader from "../Loader/Loader";
 import Error from "../Error/Error";
 import { getCatalog } from "src/services/api";
+import { setCars } from "src/redux/cars/carsSlice";
 
 const Gallery = ({ renderFavorites }) => {
+  const dispatch = useDispatch();
+  const cars = useSelector(selectCars);
   const favorites = useSelector(selectFavorites);
 
-  const [cars, setCars] = useState([]);
+  const [favoriteCars, setFavoriteCars] = useState([]);
   const [page, setPage] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [loadMoreClicked, setLoadMoreClicked] = useState(false);
-  const [favoriteCars, setFavoriteCars] = useState([]);
 
   const containerRef = useRef(null);
 
@@ -27,9 +29,7 @@ const Gallery = ({ renderFavorites }) => {
       setIsLoading(true);
       try {
         const response = await getCatalog(page);
-        const newCars = response;
-        console.log(newCars);
-        setCars((prevCars) => [...prevCars, ...newCars]);
+        dispatch(setCars(response));
       } catch (error) {
         setError(error);
       } finally {
@@ -38,7 +38,7 @@ const Gallery = ({ renderFavorites }) => {
     };
 
     fetchCars(page);
-  }, [page]);
+  }, [page, dispatch]);
 
   useEffect(() => {
     const favoriteCars = cars.filter((car) => favorites.includes(car.id));
