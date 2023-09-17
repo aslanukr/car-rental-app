@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { GalleryGrid, GalleryWrapper, LoadMoreBtn } from "./Gallery.styled";
 
 import CarCard from "../CarCard/CarCard";
@@ -19,6 +19,9 @@ const Gallery = ({ renderFavorites }) => {
   const [page, setPage] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [loadMoreClicked, setLoadMoreClicked] = useState(false);
+
+  const containerRef = useRef(null);
 
   // const dispatch = useDispatch();
 
@@ -49,7 +52,17 @@ const Gallery = ({ renderFavorites }) => {
 
   const handleLoadMore = () => {
     setPage((prev) => prev + 1);
+    setLoadMoreClicked(true);
   };
+
+  useEffect(() => {
+    if (loadMoreClicked && containerRef.current) {
+      containerRef.current.scrollIntoView({
+        behavior: "smooth",
+        block: "end",
+      });
+    }
+  }, [cars, loadMoreClicked]);
 
   return (
     <GalleryWrapper>
@@ -59,7 +72,7 @@ const Gallery = ({ renderFavorites }) => {
         <Error error={error} />
       ) : (
         <>
-          <GalleryGrid>
+          <GalleryGrid ref={containerRef}>
             {cars &&
               (renderFavorites
                 ? favoriteCars.map((car) => <CarCard key={car.id} car={car} />)
