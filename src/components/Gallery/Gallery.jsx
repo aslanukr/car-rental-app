@@ -1,4 +1,5 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
+import { Link as ScrollLink, animateScroll as scroll } from "react-scroll";
 import { GalleryGrid, GalleryWrapper, LoadMoreBtn } from "./Gallery.styled";
 
 import CarCard from "../CarCard/CarCard";
@@ -25,12 +26,9 @@ const Gallery = ({ renderFavorites }) => {
   const [page, setPage] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [loadMoreClicked, setLoadMoreClicked] = useState(false);
 
   const [filteredCars, setFilteredCars] = useState([]);
   const [filterValues, setFilterValues] = useState(null);
-
-  const containerRef = useRef(null);
 
   useEffect(() => {
     const fetchCars = async (page) => {
@@ -72,17 +70,10 @@ const Gallery = ({ renderFavorites }) => {
 
   const handleLoadMore = () => {
     setPage((prev) => prev + 1);
-    setLoadMoreClicked(true);
+    scroll.scrollToBottom({
+      duration: 1000,
+    });
   };
-
-  useEffect(() => {
-    if (loadMoreClicked && containerRef.current) {
-      containerRef.current.scrollIntoView({
-        behavior: "smooth",
-        block: "end",
-      });
-    }
-  }, [loadMoreClicked]);
 
   return (
     <>
@@ -99,7 +90,7 @@ const Gallery = ({ renderFavorites }) => {
             <Error error={error} />
           ) : (
             <>
-              <GalleryGrid ref={containerRef}>
+              <GalleryGrid>
                 {cars &&
                   (renderFavorites
                     ? favoriteCars.map((car) => (
@@ -110,10 +101,15 @@ const Gallery = ({ renderFavorites }) => {
                       )))}
               </GalleryGrid>
               {!renderFavorites && isLoadMoreVisible && (
-                <LoadMoreBtn onClick={handleLoadMore}>Load more</LoadMoreBtn>
+                <ScrollLink to="bottom" smooth={true} duration={1000}>
+                  <LoadMoreBtn onClick={handleLoadMore} disabled={isLoading}>
+                    {isLoading ? "Loading..." : "Load more"}
+                  </LoadMoreBtn>
+                </ScrollLink>
               )}
             </>
           )}
+          <div></div>
         </GalleryWrapper>
       </GallerySection>
     </>
