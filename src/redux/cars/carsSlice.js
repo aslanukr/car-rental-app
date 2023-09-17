@@ -6,7 +6,13 @@ const carsSlice = createSlice({
   initialState: initialState,
   reducers: {
     setCars: (state, action) => {
-      state.cars = [...state.cars, ...action.payload];
+      const newCars = action.payload;
+
+      const uniqueNewCars = newCars.filter((newCar) => {
+        return !state.cars.some((existingCar) => existingCar.id === newCar.id);
+      });
+
+      state.cars = [...state.cars, ...uniqueNewCars];
     },
   },
 });
