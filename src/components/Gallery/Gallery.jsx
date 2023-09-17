@@ -18,6 +18,7 @@ const Gallery = ({ renderFavorites }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [loadMoreClicked, setLoadMoreClicked] = useState(false);
+  const [favoriteCars, setFavoriteCars] = useState([]);
 
   const containerRef = useRef(null);
 
@@ -39,7 +40,11 @@ const Gallery = ({ renderFavorites }) => {
     fetchCars(page);
   }, [page]);
 
-  const favoriteCars = cars.filter((car) => favorites.includes(car.id));
+  useEffect(() => {
+    const favoriteCars = cars.filter((car) => favorites.includes(car.id));
+    setFavoriteCars(favoriteCars);
+  }, [cars, favorites]);
+
   const isLoadMoreVisible = cars.length % 8 === 0;
 
   const handleLoadMore = () => {
@@ -54,7 +59,7 @@ const Gallery = ({ renderFavorites }) => {
         block: "end",
       });
     }
-  }, [cars, loadMoreClicked]);
+  }, [loadMoreClicked]);
 
   return (
     <GalleryWrapper>
