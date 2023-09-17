@@ -22,6 +22,13 @@ function generateNumberArray(start, end, increment) {
 }
 
 const sortedMakes = makes.sort((a, b) => a.localeCompare(b));
+<<<<<<< Updated upstream
+=======
+const optionsMake = makeSelectOptions(sortedMakes);
+const prices = generateNumberArray(10, 500, 10);
+const optionsPrice = makeSelectOptions(prices);
+
+>>>>>>> Stashed changes
 const optionsMake = makeSelectOptions(sortedMakes);
 const prices = generateNumberArray(10, 250, 10);
 const optionsPrice = makeSelectOptions(prices);
