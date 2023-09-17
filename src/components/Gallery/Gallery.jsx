@@ -38,7 +38,7 @@ const Gallery = ({ renderFavorites }) => {
     };
 
     fetchCars(page);
-  }, [page, dispatch]);
+  }, [dispatch, page]);
 
   useEffect(() => {
     const favoriteCars = cars.filter((car) => favorites.includes(car.id));
