@@ -3,9 +3,9 @@ import { getCatalog } from "src/services/api";
 
 export const getCarsThunk = createAsyncThunk(
   "cars/getCatalog",
-  async (_, thunkAPI) => {
+  async (page, thunkAPI) => {
     try {
-      return await getCatalog();
+      return await getCatalog(page);
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
     }

@@ -32,10 +32,9 @@ const Gallery = ({ renderFavorites }) => {
 
   const favoriteCars = cars.filter((car) => favorites.includes(car.id));
 
-  const handleloadMore = () => {
-    const nextPage = currentPage + 1;
-    if (nextPage <= totalPages && !isLoading) {
-      dispatch(getCarsThunk(nextPage));
+  const handleLoadMore = () => {
+    if (!isLoading) {
+      dispatch(getCarsThunk(currentPage + 1));
     }
   };
 
@@ -54,7 +53,7 @@ const Gallery = ({ renderFavorites }) => {
                 : cars.map((car) => <CarCard key={car.id} car={car} />))}
           </GalleryGrid>
           {!renderFavorites && (
-            <LoadMoreBtn onClick={handleloadMore}>Load more</LoadMoreBtn>
+            <LoadMoreBtn onClick={handleLoadMore}>Load more</LoadMoreBtn>
           )}
         </>
       )}
