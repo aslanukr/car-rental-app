@@ -28,10 +28,10 @@ const Gallery = ({ renderFavorites }) => {
   const [error, setError] = useState(null);
 
   const [filteredCars, setFilteredCars] = useState([]);
-  const [filterValues, setFilterValues] = useState(null);
+  const [filterParams, setFilterParams] = useState(null);
 
   useEffect(() => {
-    const fetchCars = async (page) => {
+    async function fetchCars(page) {
       setIsLoading(true);
       try {
         const response = await getCatalog(page);
@@ -41,7 +41,7 @@ const Gallery = ({ renderFavorites }) => {
       } finally {
         setIsLoading(false);
       }
-    };
+    }
 
     fetchCars(page);
   }, [dispatch, page]);
@@ -53,14 +53,14 @@ const Gallery = ({ renderFavorites }) => {
 
   useEffect(() => {
     const filtered = cars.filter((car) => {
-      if (filterValues && car.make !== filterValues) {
+      if (filterParams && car.make !== filterParams) {
         return false;
       }
       return true;
     });
 
     setFilteredCars(filtered);
-  }, [cars, filterValues]);
+  }, [cars, filterParams]);
 
   const handleFilter = (e) => {
     setFilterValues(e);
