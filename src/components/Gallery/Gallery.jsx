@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { GalleryGrid, GalleryWrapper, LoadMoreBtn } from "./Gallery.styled";
 
 import CarCard from "../CarCard/CarCard";
@@ -8,9 +8,7 @@ import {
   selectCars,
   selectCarsError,
   selectCarsIsLoading,
-  selectCurrentPage,
   selectFavorites,
-  selectTotalPages,
 } from "src/redux/selectors";
 import { getCarsThunk } from "src/redux/cars/carsThunk";
 import Loader from "../Loader/Loader";
@@ -21,21 +19,18 @@ const Gallery = ({ renderFavorites }) => {
   const favorites = useSelector(selectFavorites);
   const isLoading = useSelector(selectCarsIsLoading);
   const error = useSelector(selectCarsError);
-  const currentPage = useSelector(selectCurrentPage);
-  const totalPages = useSelector(selectTotalPages);
+  const [page, setPage] = useState(1);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getCarsThunk());
-  }, [dispatch]);
+    dispatch(getCarsThunk(page));
+  }, [dispatch, page]);
 
   const favoriteCars = cars.filter((car) => favorites.includes(car.id));
 
   const handleLoadMore = () => {
-    if (!isLoading) {
-      dispatch(getCarsThunk(currentPage + 1));
-    }
+    setPage((prev) => prev + 1);
   };
 
   return (
