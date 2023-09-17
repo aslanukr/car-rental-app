@@ -10,6 +10,11 @@ import Loader from "../Loader/Loader";
 import Error from "../Error/Error";
 import { getCatalog } from "src/services/api";
 import { setCars } from "src/redux/cars/carsSlice";
+import {
+  FilterSection,
+  GallerySection,
+} from "src/pages/Catalog/Catalog.styled";
+import Filter from "../Filter/Filter";
 
 const Gallery = ({ renderFavorites }) => {
   const dispatch = useDispatch();
@@ -21,6 +26,9 @@ const Gallery = ({ renderFavorites }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [loadMoreClicked, setLoadMoreClicked] = useState(false);
+
+  const [filteredCars, setFilteredCars] = useState([]);
+  const [filterValues, setFilterValues] = useState(null);
 
   const containerRef = useRef(null);
 
@@ -45,6 +53,21 @@ const Gallery = ({ renderFavorites }) => {
     setFavoriteCars(favoriteCars);
   }, [cars, favorites]);
 
+  useEffect(() => {
+    const filtered = cars.filter((car) => {
+      if (filterValues && car.make !== filterValues) {
+        return false;
+      }
+      return true;
+    });
+
+    setFilteredCars(filtered);
+  }, [cars, filterValues]);
+
+  const handleFilter = (e) => {
+    setFilterValues(e);
+  };
+
   const isLoadMoreVisible = cars.length % 8 === 0;
 
   const handleLoadMore = () => {
@@ -62,25 +85,38 @@ const Gallery = ({ renderFavorites }) => {
   }, [loadMoreClicked]);
 
   return (
-    <GalleryWrapper>
-      {isLoading ? (
-        <Loader />
-      ) : error ? (
-        <Error error={error} />
-      ) : (
-        <>
-          <GalleryGrid ref={containerRef}>
-            {cars &&
-              (renderFavorites
-                ? favoriteCars.map((car) => <CarCard key={car.id} car={car} />)
-                : cars.map((car) => <CarCard key={car.id} car={car} />))}
-          </GalleryGrid>
-          {!renderFavorites && isLoadMoreVisible && (
-            <LoadMoreBtn onClick={handleLoadMore}>Load more</LoadMoreBtn>
-          )}
-        </>
+    <>
+      {!renderFavorites && (
+        <FilterSection>
+          <Filter onFilter={handleFilter} />
+        </FilterSection>
       )}
-    </GalleryWrapper>
+      <GallerySection>
+        <GalleryWrapper>
+          {isLoading ? (
+            <Loader />
+          ) : error ? (
+            <Error error={error} />
+          ) : (
+            <>
+              <GalleryGrid ref={containerRef}>
+                {cars &&
+                  (renderFavorites
+                    ? favoriteCars.map((car) => (
+                        <CarCard key={car.id} car={car} />
+                      ))
+                    : filteredCars.map((car) => (
+                        <CarCard key={car.id} car={car} />
+                      )))}
+              </GalleryGrid>
+              {!renderFavorites && isLoadMoreVisible && (
+                <LoadMoreBtn onClick={handleLoadMore}>Load more</LoadMoreBtn>
+              )}
+            </>
+          )}
+        </GalleryWrapper>
+      </GallerySection>
+    </>
   );
 };
 

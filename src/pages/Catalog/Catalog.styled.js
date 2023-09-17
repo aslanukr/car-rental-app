@@ -6,6 +6,8 @@ export const GallerySection = styled.section`
 `;
 
 export const FilterSection = styled.section`
+  display: flex;
+  justify-content: center;
   margin-top: 50px;
   margin-bottom: 50px;
 `;
