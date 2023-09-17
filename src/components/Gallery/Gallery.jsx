@@ -26,26 +26,26 @@ const Gallery = ({ renderFavorites }) => {
   //   dispatch(getCarsThunk(page));
   // }, [dispatch, page]);
 
-  const fetchCars = async (page) => {
-    setIsLoading(true);
-    try {
-      const response = await getCatalog(page);
-      const newCars = response;
-      setCars((prevCars) => [...prevCars, ...newCars]);
-    } catch (error) {
-      setError(error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
   useEffect(() => {
-    if (page === 1) {
-      fetchCars(page);
-    }
+    const fetchCars = async (page) => {
+      setIsLoading(true);
+      try {
+        const response = await getCatalog(page);
+        const newCars = response;
+        console.log(newCars);
+        setCars((prevCars) => [...prevCars, ...newCars]);
+      } catch (error) {
+        setError(error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchCars(page);
   }, [page]);
 
   const favoriteCars = cars.filter((car) => favorites.includes(car.id));
+  const isLoadMoreVisible = cars.length % 8 === 0;
 
   const handleLoadMore = () => {
     setPage((prev) => prev + 1);
@@ -65,7 +65,7 @@ const Gallery = ({ renderFavorites }) => {
                 ? favoriteCars.map((car) => <CarCard key={car.id} car={car} />)
                 : cars.map((car) => <CarCard key={car.id} car={car} />))}
           </GalleryGrid>
-          {!renderFavorites && (
+          {!renderFavorites && isLoadMoreVisible && (
             <LoadMoreBtn onClick={handleLoadMore}>Load more</LoadMoreBtn>
           )}
         </>
