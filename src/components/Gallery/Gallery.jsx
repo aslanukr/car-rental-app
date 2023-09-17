@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { GalleryGrid } from "./Gallery.styled";
+import { GalleryGrid, GalleryWrapper, LoadMoreBtn } from "./Gallery.styled";
 
 import CarCard from "../CarCard/CarCard";
 
@@ -8,7 +8,9 @@ import {
   selectCars,
   selectCarsError,
   selectCarsIsLoading,
+  selectCurrentPage,
   selectFavorites,
+  selectTotalPages,
 } from "src/redux/selectors";
 import { getCarsThunk } from "src/redux/cars/carsThunk";
 import Loader from "../Loader/Loader";
@@ -19,6 +21,8 @@ const Gallery = ({ renderFavorites }) => {
   const favorites = useSelector(selectFavorites);
   const isLoading = useSelector(selectCarsIsLoading);
   const error = useSelector(selectCarsError);
+  const currentPage = useSelector(selectCurrentPage);
+  const totalPages = useSelector(selectTotalPages);
 
   const dispatch = useDispatch();
 
@@ -28,21 +32,33 @@ const Gallery = ({ renderFavorites }) => {
 
   const favoriteCars = cars.filter((car) => favorites.includes(car.id));
 
+  const handleloadMore = () => {
+    const nextPage = currentPage + 1;
+    if (nextPage <= totalPages && !isLoading) {
+      dispatch(getCarsThunk(nextPage));
+    }
+  };
+
   return (
-    <div>
+    <GalleryWrapper>
       {isLoading ? (
         <Loader />
       ) : error ? (
         <Error error={error} />
       ) : (
-        <GalleryGrid>
-          {cars &&
-            (renderFavorites
-              ? favoriteCars.map((car) => <CarCard key={car.id} car={car} />)
-              : cars.map((car) => <CarCard key={car.id} car={car} />))}
-        </GalleryGrid>
+        <>
+          <GalleryGrid>
+            {cars &&
+              (renderFavorites
+                ? favoriteCars.map((car) => <CarCard key={car.id} car={car} />)
+                : cars.map((car) => <CarCard key={car.id} car={car} />))}
+          </GalleryGrid>
+          {!renderFavorites && (
+            <LoadMoreBtn onClick={handleloadMore}>Load more</LoadMoreBtn>
+          )}
+        </>
       )}
-    </div>
+    </GalleryWrapper>
   );
 };
 
