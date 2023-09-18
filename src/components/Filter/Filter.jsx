@@ -54,7 +54,7 @@ const Filter = ({ onFilter }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    onFilter(make);
+    onFilter({ make, price, from, to });
   };
 
   return (
@@ -85,7 +85,7 @@ const Filter = ({ onFilter }) => {
             placeholder="To $"
             isSearchable={false}
             unstyled
-            styles={stylesMake}
+            styles={stylesPrice}
           />
         </LabelWrapper>
 

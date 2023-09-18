@@ -55,7 +55,7 @@ export const TextInput = styled.input`
   padding: 14px 18px;
   border: none;
 
-  color: rgba(138, 138, 137, 0.2);
+  color: rgba(18, 20, 23, 1);
   background-color: rgba(247, 247, 251, 1);
 
   &::placeholder {

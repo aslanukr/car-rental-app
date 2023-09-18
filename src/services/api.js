@@ -7,3 +7,11 @@ export const getCatalog = async (page = 1) => {
 
   return response.data;
 };
+
+export const getAllCars = async () => {
+  const response = await axios.get(
+    `https://648f662f75a96b664445168f.mockapi.io/advert`
+  );
+
+  return response.data;
+};

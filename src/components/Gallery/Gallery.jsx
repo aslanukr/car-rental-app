@@ -9,13 +9,14 @@ import { selectCars, selectFavorites } from "src/redux/selectors";
 
 import Loader from "../Loader/Loader";
 import Error from "../Error/Error";
-import { getCatalog } from "src/services/api";
+import { getAllCars, getCatalog } from "src/services/api";
 import { setCars } from "src/redux/cars/carsSlice";
 import {
   FilterSection,
   GallerySection,
 } from "src/pages/Catalog/Catalog.styled";
 import Filter from "../Filter/Filter";
+import filterCars from "src/utilities/filter";
 
 const Gallery = ({ renderFavorites }) => {
   const dispatch = useDispatch();
@@ -26,7 +27,7 @@ const Gallery = ({ renderFavorites }) => {
   const [page, setPage] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
-
+  const [allCars, setAllCars] = useState(null);
   const [filteredCars, setFilteredCars] = useState([]);
   const [filterParams, setFilterParams] = useState(null);
 
@@ -52,18 +53,32 @@ const Gallery = ({ renderFavorites }) => {
   }, [cars, favorites]);
 
   useEffect(() => {
-    const filtered = cars.filter((car) => {
-      if (filterParams && car.make !== filterParams) {
-        return false;
-      }
-      return true;
-    });
+    if (!filterParams) return;
 
-    setFilteredCars(filtered);
-  }, [cars, filterParams]);
+    async function fetchAllCars() {
+      try {
+        setIsLoading(true);
+        const response = await getAllCars();
+        setAllCars(response);
+      } catch (error) {
+        setError(error.message);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+
+    fetchAllCars();
+  }, [filterParams]);
+
+  useEffect(() => {
+    if (allCars && filterParams) {
+      const filtered = filterCars(filterParams, allCars);
+      setFilteredCars(filtered);
+    }
+  }, [allCars, filterParams]);
 
   const handleFilter = (e) => {
-    setFilterValues(e);
+    setFilterParams(e);
   };
 
   const isLoadMoreVisible = cars.length % 8 === 0;
@@ -74,6 +89,8 @@ const Gallery = ({ renderFavorites }) => {
       duration: 1000,
     });
   };
+
+  const data = filteredCars.length ? filteredCars : cars;
 
   return (
     <>
@@ -96,9 +113,7 @@ const Gallery = ({ renderFavorites }) => {
                     ? favoriteCars.map((car) => (
                         <CarCard key={car.id} car={car} />
                       ))
-                    : filteredCars.map((car) => (
-                        <CarCard key={car.id} car={car} />
-                      )))}
+                    : data.map((car) => <CarCard key={car.id} car={car} />))}
               </GalleryGrid>
               {!renderFavorites && isLoadMoreVisible && (
                 <ScrollLink to="bottom" smooth={true} duration={1000}>
