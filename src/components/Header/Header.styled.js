@@ -45,12 +45,16 @@ export const LogoSpan = styled.span`
 `;
 
 export const LinkList = styled.ul`
+  display: flex;
   justify-content: center;
   display: flex;
-  gap: 20px;
+  gap: 50px;
 `;
 
 export const Link = styled(NavLink)`
+  display: flex;
+  align-items: center;
+  gap: 5px;
   font-size: 25px;
   font-weight: 500;
   color: #3d6889;

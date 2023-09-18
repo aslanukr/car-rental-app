@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { AiTwotoneHeart } from "react-icons/ai";
 
 export const ImageThumb = styled.div`
   position: relative;
@@ -26,9 +25,4 @@ export const FavoriteBtn = styled.button`
   padding: 0;
   background: none;
   border: none;
-`;
-
-export const HeartIcon = styled(AiTwotoneHeart)`
-  width: 18px;
-  height: 18px;
 `;
