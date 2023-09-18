@@ -69,7 +69,7 @@ const Gallery = ({ renderFavorites }) => {
     if (allCars && filterParams) {
       const filtered = filterCars(filterParams, allCars);
       setFilteredCars(filtered);
-      dispatch(setCars(filtered));
+      dispatch(setCars(allCars));
     }
   }, [allCars, dispatch, filterParams]);
 
