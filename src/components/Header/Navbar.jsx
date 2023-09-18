@@ -2,10 +2,11 @@ import { Link, LinkList } from "./Header.styled";
 import { LiaCarSideSolid, LiaHomeSolid } from "react-icons/lia";
 
 import { RiHeartFill, RiHeartLine } from "react-icons/ri";
-import { getFavoritesLocalStorage } from "src/utilities/localStorage";
+import { useSelector } from "react-redux";
+import { selectFavTotal } from "src/redux/selectors";
 
 const Navbar = () => {
-  const favorites = getFavoritesLocalStorage();
+  const { total } = useSelector(selectFavTotal);
 
   return (
     <nav>
@@ -24,9 +25,9 @@ const Navbar = () => {
         </li>
         <li>
           <Link to={`favorites`}>
-            {favorites.length !== 0 ? (
+            {total !== 0 ? (
               <>
-                <span>{favorites.length}</span>
+                <span>{total}</span>
                 <RiHeartFill color="#3470ff" size={25} />
               </>
             ) : (

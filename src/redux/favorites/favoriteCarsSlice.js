@@ -7,7 +7,7 @@ const favoritesSlice = createSlice({
   },
   reducers: {
     setFavTotal: (state, action) => {
-      state = action.payload;
+      state.total = action.payload;
     },
   },
 });
