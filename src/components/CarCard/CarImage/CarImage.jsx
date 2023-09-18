@@ -2,31 +2,15 @@ import { FavoriteBtn, Image, ImageThumb } from "./CarImage.styled";
 import { RiHeartFill, RiHeartLine } from "react-icons/ri";
 import placeholderCar from "src/assets/images/placeholder-car.jpg";
 
-import { useDispatch, useSelector } from "react-redux";
-import {
-  addToFavorites,
-  removeFromFavorites,
-} from "src/redux/favorites/favoritesSlice";
-import { selectIfCarFavorite } from "src/redux/selectors";
-
-const CarImage = ({ imageURL, alt, id }) => {
-  const dispatch = useDispatch();
-  const isFavorite = useSelector((state) => selectIfCarFavorite(state, id));
-
-  const toggleFavorite = () => {
-    if (isFavorite) {
-      dispatch(removeFromFavorites({ carId: id }));
-    } else {
-      dispatch(addToFavorites({ carId: id }));
-    }
-  };
+const CarImage = ({ car, isFavorite, toggleFavorite }) => {
+  const { img, make, model } = car;
 
   return (
     <ImageThumb>
-      {imageURL ? (
-        <Image src={imageURL} alt={alt} />
+      {img ? (
+        <Image src={img} alt={`${make} ${model}`} />
       ) : (
-        <Image src={placeholderCar} alt={alt} />
+        <Image src={placeholderCar} alt={`${make} ${model}`} />
       )}
       <FavoriteBtn onClick={toggleFavorite}>
         {isFavorite ? (
