@@ -48,11 +48,6 @@ const Gallery = ({ renderFavorites }) => {
   }, [dispatch, page]);
 
   useEffect(() => {
-    const favoriteCars = cars.filter((car) => favorites.includes(car.id));
-    setFavoriteCars(favoriteCars);
-  }, [cars, favorites]);
-
-  useEffect(() => {
     if (!filterParams) return;
 
     async function fetchAllCars() {
@@ -74,12 +69,18 @@ const Gallery = ({ renderFavorites }) => {
     if (allCars && filterParams) {
       const filtered = filterCars(filterParams, allCars);
       setFilteredCars(filtered);
+      dispatch(setCars(filtered));
     }
-  }, [allCars, filterParams]);
+  }, [allCars, dispatch, filterParams]);
 
   const handleFilter = (e) => {
     setFilterParams(e);
   };
+
+  useEffect(() => {
+    const favoriteCars = cars.filter((car) => favorites.includes(car.id));
+    setFavoriteCars(favoriteCars);
+  }, [cars, favorites]);
 
   const isLoadMoreVisible = cars.length % 8 === 0;
 
