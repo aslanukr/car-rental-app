@@ -7,11 +7,11 @@ import { selectFavTotal } from "src/redux/selectors";
 import { useSelector } from "react-redux";
 
 const Favorites = () => {
-  const favoritesTotal = useSelector(selectFavTotal);
+  const { total } = useSelector(selectFavTotal);
 
   return (
     <>
-      {favoritesTotal === 0 ? (
+      {total === 0 ? (
         <EmptyFavorites />
       ) : (
         <GallerySection>

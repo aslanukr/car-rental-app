@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link as ScrollLink, animateScroll as scroll } from "react-scroll";
 import { GalleryGrid, GalleryWrapper, LoadMoreBtn } from "./Gallery.styled";
 
-import { selectCars, selectFavTotal } from "src/redux/selectors";
+import { selectCars } from "src/redux/selectors";
 import CarCard from "../CarCard/CarCard";
 import Loader from "../Loader/Loader";
 import Error from "../Error/Error";
@@ -108,13 +108,10 @@ const Gallery = ({ renderFavorites }) => {
       setFavoriteCars((prevFavorites) =>
         prevFavorites.filter((favCar) => favCar.id !== car.id)
       );
-      dispatch(setFavTotal(favoriteCars.length));
     } else {
       addFavoritesToLocalStorage(car);
 
       setFavoriteCars((prevFavorites) => [...prevFavorites, car]);
-      console.log(favoriteCars);
-      dispatch(setFavTotal(favoriteCars.length));
     }
   };
 
@@ -142,6 +139,12 @@ const Gallery = ({ renderFavorites }) => {
       duration: 1000,
     });
   };
+
+  useEffect(() => {
+    setFavTotal(favoriteCars.length);
+
+    dispatch(setFavTotal(favoriteCars.length));
+  }, [dispatch, favoriteCars]);
 
   const data = filteredCars.length ? filteredCars : cars;
 
