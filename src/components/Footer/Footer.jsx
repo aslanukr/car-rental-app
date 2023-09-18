@@ -40,7 +40,7 @@ const Footer = () => {
           <BsFillTelephoneFill size={20} color="white" />
           +38 073 000 00 00
         </ContactLink>
-        <ContactLink to={"email:order@car-rental.com"}>
+        <ContactLink to={"mailto:order@car-rental.com"}>
           <MdAlternateEmail size={20} color="white" />
           order@car-rental.com
         </ContactLink>
