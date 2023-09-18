@@ -2,15 +2,16 @@ import Gallery from "src/components/Gallery/Gallery";
 import { GallerySection } from "../Catalog/Catalog.styled";
 
 import EmptyFavorites from "src/components/EmptyFavorites/EmptyFavorites";
+
+import { selectFavTotal } from "src/redux/selectors";
 import { useSelector } from "react-redux";
-import { selectFavorites } from "src/redux/selectors";
 
 const Favorites = () => {
-  const favorites = useSelector(selectFavorites);
+  const favoritesTotal = useSelector(selectFavTotal);
 
   return (
     <>
-      {favorites.length === 0 ? (
+      {favoritesTotal === 0 ? (
         <EmptyFavorites />
       ) : (
         <GallerySection>

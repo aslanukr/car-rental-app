@@ -2,11 +2,11 @@ import { Link, LinkList } from "./Header.styled";
 import { LiaCarSideSolid, LiaHomeSolid } from "react-icons/lia";
 
 import { RiHeartFill, RiHeartLine } from "react-icons/ri";
-import { useSelector } from "react-redux";
-import { selectFavorites } from "src/redux/selectors";
+import { getFavoritesLocalStorage } from "src/utilities/localStorage";
 
 const Navbar = () => {
-  const favorites = useSelector(selectFavorites);
+  const favorites = getFavoritesLocalStorage();
+
   return (
     <nav>
       <LinkList>
