@@ -12,12 +12,12 @@ import img1 from "assets/images/1.png";
 import img2 from "assets/images/2.png";
 import img3 from "assets/images/3.png";
 import img4 from "assets/images/4.png";
-import lastImg from "assets/images/last.png";
+
 import { useNavigate } from "react-router-dom";
 
 const HeroSwiper = () => {
   const navigate = useNavigate();
-  const images = [initialImg, img1, img2, img3, img4, lastImg];
+  const images = [initialImg, img1, img2, img3, img4];
 
   return (
     <SwiperHero
