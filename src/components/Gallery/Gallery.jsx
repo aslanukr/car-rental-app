@@ -66,6 +66,7 @@ const Gallery = ({ renderFavorites }) => {
   }, [filterParams]);
 
   useEffect(() => {
+    setFilteredCars([]);
     if (allCars && filterParams) {
       const filtered = filterCars(filterParams, allCars);
       setFilteredCars(filtered);
